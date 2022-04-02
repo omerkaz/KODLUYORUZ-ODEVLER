@@ -1,0 +1,74 @@
+/* TÜM SİTELERİ İLGİLENDİREN - START */
+
+
+body {
+    background-color: rgb(151, 224, 155);
+    font-family: 'Oswald', sans-serif;
+}
+
+footer {
+    margin-left: 42%;
+}
+
+.navtablo {
+    position: relative;
+    left: 44%;
+}
+
+.headerbaslik {
+    background-color: rgb(0, 0, 0);
+    color: rgb(250, 59, 91);
+    display: inline-block;
+    position: relative;
+    left: 47%;
+    border-radius: 25px;
+}
+
+.altbaslik {
+    margin-left: 44%;
+    margin-right: 25%;
+    margin-bottom: 30px;
+}
+
+
+/* TÜM SİTELERİ İLGİLENDİREN - END */
+
+/* ANASAYFA - START */
+#index-main {
+    position: relative;
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+#urun-listesi {
+    margin-top: 35px;
+    margin-left: 32%;
+}
+/* ANASAYFA - END */
+
+/* HAKKIMIZDA - START */
+#about-us-main {
+    position: relative;
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    margin-left: 25%;
+    margin-right: 25%;
+    font-style: italic;
+}
+/* HAKKIMIZDA - END */
+
+/* ÜRÜNLERİMİZ - START */
+#our-pro-main {
+    position: relative;
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 25px;
+    margin-left: 26%;
+    margin-right: 25%;
+}
+
+#our-pro-article {
+    margin-left: 21%;
+}
+/* ÜRÜNLERİMİZ - END */
