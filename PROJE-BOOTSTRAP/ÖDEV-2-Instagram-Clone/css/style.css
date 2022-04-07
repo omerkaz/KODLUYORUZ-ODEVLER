@@ -11,6 +11,7 @@ body {
 
 ::placeholder {
   background: url(/PROJE-BOOTSTRAP/ÖDEV-2-Instagram-Clone/assets/search-solid.svg);
+  background: url(/assets/search-solid.svg);
   background-repeat: no-repeat;
   padding-left: 12px;
   background-size: 5%;
