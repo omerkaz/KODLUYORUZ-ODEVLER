@@ -1,11 +1,11 @@
 let userName = prompt("Adınızı giriniz.");
 document.querySelector(`#prompValue`).innerHTML = userName;
 
-
-
 function tarihSaat() {   
+
 const date = new Date()
-let [hour, minutes, second, day]= [date.getHours(), date.getMinutes(), date.getSeconds(), date.toLocaleDateString()]             
+var [hour, minutes, second, day]= [date.getHours(), date.getMinutes(), date.getSeconds(), date.toLocaleDateString()]             
+
 switch(true) {
     case hour < 10:
         hour = `0` + hour;
@@ -17,7 +17,7 @@ switch(true) {
         second = `0` + second;
     break;
 }
-document.querySelector(`#clock`).innerHTML = `${hour}:${minutes}:${second} ${day}`
+document.querySelector(`#clock`).innerHTML = `${hour}:${minutes}:${second} / ${day}`
 }
 setInterval(tarihSaat, 1000);
 
