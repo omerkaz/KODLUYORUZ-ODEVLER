@@ -24,13 +24,9 @@ setInterval(clock, 1000);
 function add() {
     
     let classListType = ["primary","secondary","success","danger","warning","dark"]
-
     let toDoInputDomValue = document.querySelector(`#toDoInput`).value
-    
     let classListCheck = document.querySelector(`#classListCheck`)
-
     let outputUlDom = document.querySelector(`#outputUl`)
-
     let createLi = document.createElement(`li`)
     
     if (toDoInputDomValue.trim() == "") {
@@ -38,45 +34,18 @@ function add() {
         
     }else {if (classListCheck.classList.contains("primary") === false){
         createLi.classList.add("list-group-item",`list-group-item-${classListType[0]}`)
-            outputUlDom.appendChild(createLi)
-        
-            createLi.innerHTML = `
-            ${toDoInputDomValue}
-            <button type="button" onclick="close(button) class="close bg-transparent float-end border border-danger px-2 py-1">
-            <span>&times;</span>
-            </button>
-            `
-            classListCheck.classList.add(`${classListType[0]}`)
+        classListCheck.classList.add(`${classListType[0]}`)
     
-        } else if (classListCheck.classList.contains("primary") === true && classListCheck.classList.contains("secondary") === false ){
-        
+        }else if (classListCheck.classList.contains("primary") === true && classListCheck.classList.contains("secondary") === false ){
             createLi.classList.add("list-group-item",`list-group-item-${classListType[1]}`)
-            outputUlDom.appendChild(createLi)
-        
-            createLi.innerHTML = `
-            ${toDoInputDomValue}
-            <button type="button" id="remove" onclick="close(button)" class="close bg-transparent float-end border border-danger px-2 py-1">
-            <span>&times;</span>
-            </button>
-            `
             classListCheck.classList.add(`${classListType[1]}`)
+
         }else if (classListCheck.classList.contains("primary") === true && classListCheck.classList.contains("secondary") === true) {
             createLi.classList.add("list-group-item",`list-group-item-${classListType[2]}`)
-            outputUlDom.appendChild(createLi)
-        
-            createLi.innerHTML = `
-            ${toDoInputDomValue}
-            <button type="button" id="remove" onclick="close(button)" class="close bg-transparent float-end border border-danger px-2 py-1">
-            <span>&times;</span>
-            </button>
-            `
             classListCheck.classList.remove("primary")
             classListCheck.classList.remove("secondary")
             classListCheck.classList.add(`${classListType[2]}`)
         }
-    
-        createLi.innerHTML = `${toDoInputDomValue}`
-        document.forms['form'].reset()
     
         let createBtn = document.createElement(`button`)
             createBtn.classList.add(`close`, `bg-transparent`,`float-end`,`border`,`border-danger`, `px-2`, `py-1`)
@@ -86,11 +55,17 @@ function add() {
     
         let createSpn = document.createElement(`span`)
             createSpn.innerHTML = `&times;`
-            createBtn.appendChild(createSpn)
-            createLi.appendChild(createBtn)
-            outputUlDom.appendChild(createLi)}
 
-    
+        createBtn.appendChild(createSpn)
+        createLi.appendChild(createBtn)
+        createLi.innerHTML = `${toDoInputDomValue}`
+        _insertChild(outputUlDom,createLi,outputUlDom.childNodes[0])}
+
+        document.forms['form'].reset()    
+}
+
+function _insertChild(parent,newElement,refElement){
+    parent.insertBefore(newElement,refElement);
 }
 
 
