@@ -1,17 +1,17 @@
-function clock() {    
+function clock() {
     const date = new Date()
-    var [hour, minutes, second, day] = [date.getHours(), date.getMinutes(), date.getSeconds(), 
+    var [hour, minutes, second, day] = [date.getHours(), date.getMinutes(), date.getSeconds(),
     date.toLocaleDateString()]
-    switch(true) {
+    switch (true) {
         case hour < 10:
             hour = `0` + hour;
-        break;
+            break;
         case minutes < 10:
             minutes = `0` + minutes;
-        break;
+            break;
         case second < 10:
             second = `0` + second;
-        break;
+            break;
     }
 
     let navClock = document.querySelector(`#clock`)
@@ -19,59 +19,85 @@ function clock() {
 }
 setInterval(clock, 1000);
 
+// Variables
+let addBtn = document.querySelector(`#addBtn`)
+let input = document.querySelector(`#toDoInput`)
+let outputUl = document.querySelector(`#outputUl`)
+let items;
+
+loadItemsFromLS()
+
+addBtn.addEventListener("click", inputItem)
 
 
-function add() {
-    
-    let classListType = ["primary","secondary","success","danger","warning","dark"]
-    let toDoInputDomValue = document.querySelector(`#toDoInput`).value
-    let classListCheck = document.querySelector(`#classListCheck`)
-    let outputUlDom = document.querySelector(`#outputUl`)
-    let createLi = document.createElement(`li`)
-    
-    if (toDoInputDomValue.trim() == "") {
-        alert('Lütfen boş bırakmayın!');
-        
-    }else {if (classListCheck.classList.contains("primary") === false){
-        createLi.classList.add("list-group-item",`list-group-item-${classListType[0]}`)
-        classListCheck.classList.add(`${classListType[0]}`)
-    
-        }else if (classListCheck.classList.contains("primary") === true && classListCheck.classList.contains("secondary") === false ){
-            createLi.classList.add("list-group-item",`list-group-item-${classListType[1]}`)
-            classListCheck.classList.add(`${classListType[1]}`)
+// Add input's value to ul and localstorage
+function inputItem() {
+    if(input.value.trim() === ""){
+        alert("Hatalı giriş!")
+        return
+    }
+    createItem(input.value)
+    setItemsLocalStorage(input.value)
+    input.value = ""
+}
 
-        }else if (classListCheck.classList.contains("primary") === true && classListCheck.classList.contains("secondary") === true) {
-            createLi.classList.add("list-group-item",`list-group-item-${classListType[2]}`)
-            classListCheck.classList.remove("primary")
-            classListCheck.classList.remove("secondary")
-            classListCheck.classList.add(`${classListType[2]}`)
+// Create li
+function createItem(text) {
+    // create li
+    let li = document.createElement(`li`)
+    li.classList.add("list-group-item")
+    li.innerText = text
+
+    // create btn
+    let btn = document.createElement(`button`)
+    btn.classList.add(`close`, `bg-transparent`, `float-end`, `border`, `border-danger`, `px-2`, `py-1`)
+    btn.onclick = function closed() {
+        this.parentElement.remove()
+        deleteItemFromLS(this.parentElement.textContent.slice(0,-1))
+    }
+    btn.innerHTML = `<span>×</span>`
+    
+    // add btn to li
+    
+    li.append(btn)
+    
+    // add li to ul
+    outputUl.appendChild(li)
+}
+
+// get items from Local Storage
+function getItemsLocalStorage() {
+    if(localStorage.getItem(`items`) === null) {
+        items = []
+    }else {
+        items = JSON.parse(localStorage.getItem(`items`))
+    }
+    return items;
+}
+
+// set item to Local Storage
+function setItemsLocalStorage(text) {
+    items = getItemsLocalStorage();
+    items.push(text)
+    localStorage.setItem(`items`, JSON.stringify(items))
+}
+
+function loadItemsFromLS() {
+    items = getItemsLocalStorage()
+    items.map(function (item) {
+        createItem(item)
+    })
+}
+
+function deleteItemFromLS(text) {
+    items = getItemsLocalStorage()
+    items.map(function(item,index){
+        if(item === text) {
+            items.splice(index,1);
         }
-    
-        let createBtn = document.createElement(`button`)
-            createBtn.classList.add(`close`, `bg-transparent`,`float-end`,`border`,`border-danger`, `px-2`, `py-1`)
-            createBtn.onclick = function closed(button) {
-            this.parentNode.parentNode.removeChild(this.parentNode);
-            }
-    
-        let createSpn = document.createElement(`span`)
-            createSpn.innerHTML = `&times;`
-
-        createBtn.appendChild(createSpn)
-        createLi.appendChild(createBtn)
-        createLi.innerHTML = `${toDoInputDomValue}`
-        _insertChild(outputUlDom,createLi,outputUlDom.childNodes[0])}
-
-        document.forms['form'].reset()    
+    })
+    localStorage.setItem(`items`, JSON.stringify(items))
 }
-
-function _insertChild(parent,newElement,refElement){
-    parent.insertBefore(newElement,refElement);
-}
-
-
-
-    
-    
 
 
 
